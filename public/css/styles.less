@@ -1,0 +1,113 @@
+@import "boilerplate";
+
+@font-face { font-family: Titillium; font-weight: bold; src: url('titillium_medium.otf'); }
+@font-face { font-family: 'Oswald'; font-style: normal; font-weight: normal; src: local('Oswald '), local('Oswald'), url('http://themes.googleusercontent.com/static/fonts/oswald/v5/-g5pDUSRgvxvOl5u-a_WHw.woff') format('woff'); }
+
+.gradient_color(@color1: #000000, @color2: #444) {
+    background: @color1 + @color2 / 2;
+    background: -moz-linear-gradient(top, @color1 0%, @color2 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@color1), color-stop(100%,@color2));
+    background: -webkit-linear-gradient(top,  @color1 0%,@color2 100%);
+    background: -o-linear-gradient(top,  @color1 0%,@color2 100%);
+    background: -ms-linear-gradient(top,  @color1 0%,@color2 100%);
+    background: linear-gradient(top,  @color1 0%,@color2 100%);
+}
+
+html, body {
+    height: 100%;
+    color: #fff;
+    font-size: 14px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.theme-blue {
+    .gradient_color(#000, #1138cc);
+}
+
+.theme-gray {
+    .gradient_color(#000, #555);
+}
+
+.iphone {
+    @iphone_tray_side: 735px;
+    @iphone_body_width: 382px;
+    @iphone_body_height: 735px;
+    @iphone_viewport_width: 320px;
+    @iphone_viewport_height: 480px;
+    
+    width: @iphone_tray_side;
+    height: @iphone_tray_side;
+    position: absolute;
+    top: 50%;
+    left: 50%;  
+    margin-left: @iphone_tray_side / -2;
+    margin-top: @iphone_tray_side / -2;
+    
+    h1 {
+        font-size: 2.3em;
+        font-weight: normal;
+        font-family: Oswald, Arial;
+        text-align: center;
+        font-smooth: always;
+        text-shadow: 1px 1px 1px #000;
+        position: absolute;
+        top: -90px;
+        -webkit-transition: top 0.5s ease-out;
+        -moz-transition: top 0.5s ease-out;
+        width: 100%;
+        //letter-spacing: 0.04em;
+    }
+    
+    .background {
+        width: @iphone_body_width;
+        height: @iphone_body_height;
+        background-image: url(../images/iphone_skin.png);
+        border: none;
+        -webkit-transition: -webkit-transform 0.5s ease-out;
+        -moz-transition: -moz-transform 0.5s ease-out;
+        position: absolute;
+        top: 50%;
+        left: 50%;  
+        margin-left: @iphone_body_width / -2;
+        margin-top: @iphone_body_height / -2;
+    }
+    
+    .viewport {
+        position: absolute;
+        width: @iphone_viewport_width;
+        height: @iphone_viewport_height;
+        left: 208px;
+        top: 129px;
+        outline: none;
+        -webkit-transition: opacity 0.2s;
+        -moz-transition: opacity 0.2s;
+        border: 2px solid #4e4e50;
+        opacity: 1;
+        visiblity: visible;
+        background-color: #111;
+        
+        &.mute {
+            visibility: hidden;
+            opacity: 0;
+        }
+    }
+    
+    &.horizontal {
+        .background {
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+        }
+        
+        .viewport {
+            width: @iphone_viewport_height;
+            height: @iphone_viewport_width;
+            top: 208px;
+            left: 125px;
+        }
+        
+        h1 {
+            top: 70px;
+        }
+    }
+}
